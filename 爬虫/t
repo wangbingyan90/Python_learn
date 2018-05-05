@@ -1,0 +1,2 @@
+http://api.csdn.net/bbs/gettopithorize? forum=YOUR_
+http://api.csdn.net/oauth2/authorize? client_id=YOUR_API_KEY&redirect_uri=YOUR_CALLBACK_URL&response_type=code 
