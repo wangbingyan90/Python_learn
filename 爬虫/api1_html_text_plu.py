@@ -1,9 +1,8 @@
 import requests
 
-url = 'http://43.225.157.231/api/values/GetShort'
+url = ' https://blog.csdn.net/api/articles?type=new&category=cloud'
 
 headers = {
-    'Host': "www.520yb.top",
     'Connection':"keep-alive",
     'Accept':"application/json",
     'X-Requested-With':"XMLHttpRequest",
@@ -18,4 +17,4 @@ headers = {
 r = requests.get(url,headers=headers,timeout=30)
 r.raise_for_status()
 r.encoding = r.apparent_encoding
-print(r.json());
+print(type(r.json()))

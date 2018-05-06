@@ -47,6 +47,7 @@ def saveData(add,r):
 
 def actionE(url,r):
     html = getHTMLText(url)
+    print(html)
     data = parsePage(html)
     parseArticle(data,r)
 
