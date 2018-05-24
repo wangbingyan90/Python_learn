@@ -51,8 +51,10 @@ def saveData(add,r):
     数据存入redis数据数据库
     '''
     id = r.incr("auto_id");
+    
     r.set("data:" + str(id) + ":title",add[0])
     r.set("data:" + str(id) + ":time",add[1])
+    r.lpush('data',add[0])
     print("id:"+ str(id) + "  插入数据："+ str(add))
     return 0
 
