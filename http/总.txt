@@ -1,0 +1,6 @@
+http://www.ibarakiken.gr.jp/www/
+
+网景于微软
+
+http://www.ietf.org/rfc/rfc2616.txt http1.1
+http://www.ietf.org/rfc

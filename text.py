@@ -1,4 +1,58 @@
+import textUserMode
+
+
 import requests
+ 
+response = requests.get('https://www.12306.cn')
+print(response.status_code)
+'''
+requests已经设置好了cookies
+import requests
+r = requests.get("https://blog.csdn.net/nav/cloud")
+print(r.cookies)
+for key, value in r.cookies.items():
+    print(key + '=' + value)
+'''
+
+'''
+http://httpbin.org 实用网站
+import requests
+
+data = {
+    'name': 'germey',
+    'age': 22
+}
+r = requests.get("http://httpbin.org/get", params=data)
+print(r.json())
+
+textUserMode.getHTMLText("http://httpbin.org")
+'''
+
+
+
+'''
+调用浏览器
+from selenium import webdriver
+
+# browser = webdriver.Chrome()
+
+# browser = webdriver.Firefox()
+
+browser = webdriver.PhantomJS()
+browser.get('https://www.baidu.com')
+print(browser.current_url)
+
+'''
+
+
+
+
+
+
+'''
+用于自提取headers
+import requests
+import re
 
 response  = requests.get("https://blog.csdn.net")
 # response  = requests.get("https://www.baidu.com")
@@ -31,3 +85,4 @@ headers = {
     'Cache-Control': 'no-cache',
 }
 print(headers)
+'''
