@@ -2,9 +2,25 @@ import textUserMode
 
 
 import requests
- 
+
+'''
+登陆成功
+headers = {
+    'Cookie':'q_c1=a15edffcb1344a36a36f44f53bdd084b|1525878546000|1525878546000; _zap=a807c53b-2440-4684-86ca-3415df302a69; d_c0="AJAju7Ommw2PTlih3DRVcE2ZMfk6yG1dJYI=|1526563873"; capsion_ticket="2|1:0|10:1527483449|14:capsion_ticket|44:NWUzZTBkZTkzOTMyNGFkMmIwNzI5NDMyYThiOTI0ZmU=|618b6840f229b0a79d19a97937759fea5d0669994d33fa19c89a38406346d753"; r_cap_id="OTVmMDNhNDYzYTQxNGEwY2E4MWIwMDRmY2UxNzAxMGM=|1527483456|3cbe272845688ed7151ede447cfff4bcef24d310"; cap_id="ZGM0NzI2MGU3YzI5NGIwNTgzOTMxOTc5MDMxMzhjMjc=|1527483456|7ca3c7afd477d4fd97bfbc7782c9712cc501d21f"; l_cap_id="OWI4OGMyMjNhZWVhNGZiZWFjOGYzMTJiMDk0NmE3ZjI=|1527483456|1b56f1081fb313f6559d4839ee13b844ec945562"; z_c0=Mi4xSUFvR0FnQUFBQUFBa0NPN3M2YWJEUmNBQUFCaEFsVk5WOXI0V3dDVTVGRlBwZFB3RllYNWk1bGp6NTl0WVE0MDdR|1527483479|317a61c41047a51ad3ba05ba396373759d74031d; __utmv=51854390.100--|2=registration_date=20150826=1^3=entry_date=20150826=1; __utma=51854390.218489189.1527483515.1527483515.1527495801.2; __utmz=51854390.1527495801.2.2.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; _xsrf=fac89fa9-37e9-477f-a6b0-8330e3bb8711',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36',
+}
+r = requests.get('https://www.zhihu.com',headers=headers)
+print(r.text)
+'''
+
+
+
+
+''' 
 response = requests.get('https://www.12306.cn')
 print(response.status_code)
+'''
+
 '''
 requests已经设置好了cookies
 import requests

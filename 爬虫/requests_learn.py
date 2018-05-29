@@ -1,6 +1,62 @@
 import requests
 
 
+# 对象化请求
+from requests import Request, Session
+url = 'http://httpbin.org/post'
+data = {
+    'name': 'germey'
+}
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36'
+}
+s = Session()
+req = Request('POST', url, data=data, headers=headers)
+prepped = s.prepare_request(req)
+r = s.send(prepped)
+print(r.text)
+
+
+# requests还提供了其他认证方式 pip3 install requests_oauthlib
+'''
+使用OAuth1认证 https://requests-oauthlib.readthedocs.io/en/latest/
+from requests_oauthlib import OAuth1
+url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
+auth = OAuth1('YOUR_APP_KEY', 'YOUR_APP_SECRET',
+              'USER_OAUTH_TOKEN', 'USER_OAUTH_TOKEN_SECRET')
+requests.get(url, auth=auth)
+'''
+
+
+# 身份认证 
+from requests.auth import HTTPBasicAuth
+r = requests.get('http://localhost:5000', auth=HTTPBasicAuth('username', 'password'))
+r = requests.get('http://localhost:5000', auth=('username', 'password'))
+print(r.status_code)
+
+
+# 设置代理
+proxies = {
+  # 普通用法
+  "http": "http://10.10.1.10:3128",
+  "https": "http://10.10.1.10:1080",
+
+  # 使用HTTP Basic Auth
+  "http": "http://user:password@10.10.1.10:3128/",
+
+  # requests还支持SOCKS协议的代理 安装socks pip3 install 'requests[socks]'
+  'http': 'socks5://user:password@host:port',
+  'https': 'socks5://user:password@host:port'
+}
+# 超时时间秒 timeout设置为None，或者不设置直接留空，永久等待，timeout=(5,11, 30) 传入元组：求总和
+requests.get("https://www.taobao.com", proxies=proxies,timeout = 1) 
+
+
+# SSL证书验证 自动验证
+response = requests.get('https://www.12306.cn', verify=False)
+print(response.status_code)
+
+
 # requests会话
 s = requests.Session()
 s.get('http://httpbin.org/cookies/set/number/123456789')
@@ -29,7 +85,7 @@ print(r.cookies)
 for key, value in r.cookies.items():
     print(key + '=' + value)
 
-# 上传图片
+# 上传文件
 files = {'file': open('favicon.ico', 'rb')}
 r = requests.post("http://httpbin.org/post", files=files)
 print(r.text)
