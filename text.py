@@ -2,6 +2,18 @@ import textUserMode
 
 
 import requests
+'''
+import os
+获取ip
+print(os.getpid())
+'''
+
+
+'''
+生成元组
+groups = ([x * 20 for x in range(1, 5 + 1)])
+print(groups)
+'''
 
 '''
 登陆成功
