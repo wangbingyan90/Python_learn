@@ -1,0 +1,82 @@
+歌单详细 http://music.163.com/api/playlist/detail?id=37880978&updateTime=-1
+
+result
+	createTime 创建时间(毫秒)
+	updateTime 更新时间(毫秒)
+	playCount 播放次数
+	coverImgUrl 封面
+	description 介绍
+	name 名称
+	id 歌单id
+	description 介绍
+	subscribedCount 收藏次数
+	shareCount 分享次数
+	commentCount 评论次数
+	tags 标签数组(0,1...)
+	
+	creator
+		avatarUrl 头像Url
+		city 城市邮编
+		userId 作者ID
+		nickname 作者姓名
+	
+	trcaks	数组
+		0
+			name 歌名
+			id 歌曲ID
+			popularity 指数
+			duration 时长(秒数*1000)
+			alias 数组
+				0：简短介绍
+			artists：数组
+				0：
+					name 歌手
+					id 歌手ID
+				1：
+					name 歌手
+					id 歌手ID
+			album
+				blurPicUrl 唱片图片
+				company 公司
+				publishTime 发布时间(毫秒)
+				subType 类型
+			
+			1 。。。。
+			
+			
+
+				
+歌曲详细 http://music.163.com/api/song/detail/?id=293940&ids=[293940]
+
+songs
+
+pip install pycryptodome	
+				
+				
+评论：				
+post https://music.163.com/weapi/v1/resource/comments/R_SO_4_862515525?csrf_token=60b92cd14e86e4a932376d2b2ce79974			
+
+total	评论数
+hotComments
+	likedCount	
+	content
+评论get
+http://music.163.com/api/v1/resource/comments/R_SO_4_167844
+
+total 评论数
+hotComments
+	user
+		userId
+		authStatus
+		nickname
+		likedCount
+		commentId
+		time
+		content
+	
+				
+			
+			
+
+
+	

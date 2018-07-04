@@ -63,7 +63,6 @@ def getSongIdList():
  songIdList = []
  for i in range(1, pageMax + 1):
   url = 'http://music.163.com/discover/playlist/?order=hot&cat=全部&limit=35&offset=' + str(i * 35)
- url.decode('utf-8')
  soup = BeautifulSoup(_session.get(url).content)
  aList = soup.findAll('a', attrs={'class': 'tit f-thide s-fc0'})
  for a in aList:
@@ -79,6 +78,13 @@ def getSongIdList():
  songIdList = list(set(songIdList))
  return songIdList
  
+def getSongs():
+  songIdList = []
+  songIdList.append("862099032")
+  songIdList.append("167876")
+  songIdList.append("167655")
+  songIdList.append("167844")
+  return songIdList
  
 # 匹配歌曲的评论数是否符合要求
 # let 评论数大于值
@@ -121,8 +127,10 @@ def setSongInfo(song):
 # 获取符合条件的歌曲列表
 def getSongList():
  print (' ##正在爬取歌曲编号... ##')
- # songIdList = getSongIdList()
- songIdList = getSongIdListBy3Party()
+#  songIdList = getSongIdList()
+ songIdList = getSongs()
+
+#  songIdList = getSongIdListBy3Party()
  print (' ##爬取歌曲编号完成，共计爬取到' + str(len(songIdList)) + '首##')
  songList = []
  print (' ##正在爬取符合评论数大于' + str(COMMENT_COUNT_LET) + '的歌曲... ##')
