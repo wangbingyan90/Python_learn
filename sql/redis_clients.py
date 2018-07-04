@@ -3,6 +3,7 @@
 #
 #wby 2018
 #https://redis.io/clients#python 官方推荐使用redis-py
+# pip install redis
 # 连接使用 redis-py
 
 import redis

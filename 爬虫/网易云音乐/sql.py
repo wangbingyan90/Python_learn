@@ -1,9 +1,5 @@
 import pymysql
 
-#
-#wby 2018
-#pip install pymysql
-
 db= pymysql.connect(host="localhost",user="root",password="root",db="video",port=3306,charset="utf8")
 cursor = db.cursor()
 sql = """INSERT INTO video6(time,href,title,img)
