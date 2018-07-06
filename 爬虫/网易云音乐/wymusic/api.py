@@ -4,8 +4,9 @@
 from bs4 import BeautifulSoup
 import requests
 from multiprocessing.pool import Pool
-# import time
-# from sqlUtil import sqlUtil
+import os
+import time
+from sqlUtil import sqlUtil
 
 class Api:
 
@@ -25,14 +26,13 @@ class Api:
             'appver': '1.5.2'
         }
         self.timeout = 30
-        # self.f = open('err.txt', 'a+',encoding='utf-8')
-        # self.sqlconnet = sqlUtil()
+        # self.f = open('err.txt', 'a+',encoding='utf-8') 多线程无法使用公共连接
+        # self.sqlconnet = sqlUtil()  多线程无法使用公共连接
 
 
     # 网络请求
     def httpRequest(self, url,type=None):
         try:
-            print("获取页面")
             r = requests.get(url, headers=self.headers,timeout=30)
             r.raise_for_status()
             r.encoding = r.apparent_encoding
@@ -41,32 +41,33 @@ class Api:
             else:
                 return r.json()
         except:
+            f = open('err.txt', 'a+',encoding='utf-8')
+            f.write('数据获取失败：'+time.strftime("%Y-%m-%d %H:%M:%S")+url+"\n")
+            f.close()
             # self.f.write('数据获取失败：'+time.strftime("%Y-%m-%d %H:%M:%S")+url+"\n")
             # self.f.close()
             return ""
 
 
     #解析歌单列表
-    def parsePlayList(self,html):
+    def parsePlayList(self,html,sqlconnet):
         soup = BeautifulSoup(html, 'lxml')
-        list_pic = soup.select('ul#m-pl-container li div img')
         list_nameUrl = soup.select('ul#m-pl-container li div a.msk')
-        list_num = soup.select('div.bottom span.nb')
-        list_author = soup.select('ul#m-pl-container li p a')
         n = 0
-        length = len(list_pic)
+        length = len(list_nameUrl)
         while n < length:
-            print('歌单图片：'+list_pic[n]['src']+'\n\n')
-            print('歌单名称：'+list_nameUrl[n]['title']+'\n\n歌单地址：'+list_nameUrl[n]['href']+'\n\n')
-            print('歌单播放量：'+list_num[n].text+'\n\n')
-            print('歌单作者：'+list_author[n]['title']+'\n\n作者主页：'+list_author[n]['href']+'\n\n\n')
+            sqlconnet.addhotPlaylist(int(list_nameUrl[n]['href'].split('=')[1]))
             n += 1
 
+
     def hotPlayListmain(self,offset):
-        print("启动线程")
+        print("启动线程："+str(os.getpid()))
+        sqlconnet = sqlUtil()
         for n in range(offset-6,offset):
+            print('页面数：'+str(n))
             url='http://music.163.com/discover/playlist?order=hot&cat=%E5%85%A8%E9%83%A8&limit=35&offset='+str(n*35)
-            self.parsePlayList(self.httpRequest(url,'text'))
+            self.parsePlayList(self.httpRequest(url,'text'),sqlconnet)
+
 
     def getHotPlayList(self,limit=None,offset=None):
         if limit==None :
@@ -79,14 +80,16 @@ class Api:
             pool.join()
         else:
             url='http://music.163.com/discover/playlist?order=hot&cat=%E5%85%A8%E9%83%A8&limit='+str(limit)+'&offset='+str(offset)
-            self.parsePlayList(self.httpRequest(url,'text'))
+            self.parsePlayList(self.httpRequest(url,'text'),sqlUtil())
+
 
     def text(self):
         # self.sqlconnet.addPlayList(12313213,'aad',123,'qweqwe',12312)
         url='http://music.163.com/discover/playlist?order=hot&cat=%E5%85%A8%E9%83%A8&limit=35&offset=0'
-        self.parsePlayList(self.httpRequest(url,'text'))
+        self.parsePlayList(self.httpRequest(url,'text'),sqlUtil())
 
 if __name__  == "__main__":
     api = Api()
+    #爬取热门歌单ip
     api.getHotPlayList()
 

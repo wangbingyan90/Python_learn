@@ -1,12 +1,26 @@
  show variables like '%character%';
 
+desc tablename
+
+select count(*) form table_name 
+
 character-set-server=utf8
 
 alter table Playlist default character set utf8;
 
-truncate table Playlist;
+truncate table hotPlaylist;
+
+drop table hotPlaylist;
 
 create database wymusic;
+
+热门歌单IP表
+create table hotPlaylist
+(
+    id int unsigned,
+    primary key(Id)
+)
+
 
 歌单表
 create table Playlist
