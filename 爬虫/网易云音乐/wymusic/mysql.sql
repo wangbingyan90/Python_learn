@@ -1,20 +1,20 @@
- show variables like '%character%';
+-- show variables like '%character%';
 
-desc tablename
+-- desc tablename
 
-select count(*) form table_name 
+-- select count(*) form table_name 
 
-character-set-server=utf8
+-- character-set-server=utf8
 
-alter table Playlist default character set utf8;
+-- alter table Playlist default character set utf8;
 
-truncate table hotPlaylist;
+-- truncate table hotPlaylist;
 
 drop table Playlist;
 drop database wymusic;
 create database wymusic;
 
-热门歌单IP表
+-- 热门歌单IP表
 create table hotPlaylist
 (
     id int unsigned,
@@ -22,7 +22,7 @@ create table hotPlaylist
 )
 DELETE FROM hotPlaylist WHERE id = 2147483647
 
-新表
+-- 新表
 create table hotPlaylistnew
 (
     id int unsigned,
@@ -35,7 +35,7 @@ create table hotPlaylistnew
 
 
 -- ok
-歌单表
+-- 歌单表
 create table PlayList
 (List_Id Int unsigned,
 List_Name varchar(50) not null,

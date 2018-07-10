@@ -45,11 +45,19 @@ class sqlUtil:
         sql = 'select id from hotPlaylist'
         return self.sqlSelectAll(sql)
 
-    
+    def selectfinshPlaylist(self,id):
+        sql = 'select id from hotPlaylistnew where id = %d' % (id) 
+        return self.sqlSelectOne(sql) is None
+
     # 查找最小id歌手
-    def selectSinger(self):
-        sql = 'select min(Singer_Id) from Singer'
-        return self.sqlSelectOne(sql)[0]
+    def selectSinger(self,singersname):
+        sql = "select Singer_Id from Singer where Singer_name= '%s'" % (singersname.replace("'", "\\'"))
+        # print(sql)
+        singerid = self.sqlSelectOne(sql)
+        if singerid is None:
+            sql = 'select min(Singer_Id) from Singer'
+            return self.sqlSelectOne(sql)[0]-1
+        return singerid[0]
 
 
     # 添加标签
@@ -69,7 +77,7 @@ class sqlUtil:
         for tagname in tags:
             tageId = self.addTag(tagname)
             sql = "insert into Relationsippt(List_Id,Tags_Id)values(%d,%d) " % (List_Id,tageId)
-            print(sql)
+            # print(sql)
             self.sqlExe(sql)
 
         
@@ -80,21 +88,27 @@ class sqlUtil:
         ShareCount,CommentCount)values(%d,'%s',%d,'%s',%d,%d,%d,'%s',%d,\
         %d,%d)" % (data[0],data[1],data[2],data[3],data[4],data[5],data[6],\
         data[7],data[8],data[9],data[10])
-        print(sql)
+        # print(sql)
         self.sqlExe(sql)
 
 
     # 添加歌单id
     def addhotPlaylist(self,List_Id):
         sql = "insert into hotPlaylist(id)values(%d) " % (List_Id)
-        print(sql)
+        # print(sql)
+        self.sqlExe(sql)
+
+    # 添加歌单id
+    def addfinshPlaylist(self,List_Id):
+        sql = "insert into hotPlaylistnew(id)values(%d) " % (List_Id)
+        # print(sql)
         self.sqlExe(sql)
 
 
     # 添加作者
     def addAuthor(self,data):
         sql = "insert into Author(Author_Id,Author_Name,Signature,city,Author_img)values(%d,'%s','%s',%d,'%s') " % (data[0],data[1],data[2],data[3],data[4])
-        print(sql)
+        # print(sql)
         self.sqlExe(sql)
 
     
@@ -111,14 +125,14 @@ class sqlUtil:
         Music_creatTime,Popularity,Description,Duration,Company,SubType)\
         values(%d,'%s','%s',%d,%d,'%s',%d,'%s','%s') " % (data[0],data[1],\
         data[2],data[3],data[4],data[5],data[6],data[7],data[8])
-        print(sql)
+        # print(sql)
         self.sqlExe(sql)
 
     
     # 添加歌手
     def addSinger (self,data):
-        sql = "insert into Singer(Singer_Id,Singer_name)values(%d,'%s') " % (data[0],data[1])
-        print(sql)
+        sql = "insert into Singer(Singer_Id,Singer_name)values(%d,'%s') " % (data[0],data[1].replace("'", "\\'"))
+        # print(sql)
         self.sqlExe(sql)
 
     
@@ -126,14 +140,14 @@ class sqlUtil:
     def addComment(self,data):
         sql = "insert into Comment(Comment_Id,Comment_content,LikedCount,Music_Id,Author_Id,\
         Comment_creatTime)values(%d,'%s',%d,%d,%d,%d) " % (data[0],data[1],data[2],data[3],data[4],data[5])
-        print(sql)
+        # print(sql)
         self.sqlExe(sql)
 
 
     # 添加关系
     def addRelationsip(self,data):
         sql = "insert into %s(%s,%s)values(%s,%s) " % (data[0],data[1],data[2],data[3],data[4])
-        print(sql)
+        # print(sql)
         self.sqlExe(sql)
 
 

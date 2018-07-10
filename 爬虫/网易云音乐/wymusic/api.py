@@ -81,7 +81,7 @@ class Api:
             sqlconnect.addMusic(data)
             sqlconnect.addRelationsip(('Relationsip','List_Id','Music_Id',result['id'],song['id']))
             for Singer in song['artists']:
-                id = sqlconnect.selectSinger()-1 if Singer['id'] == 0 else Singer['id']
+                id = sqlconnect.selectSinger(Singer['name']) if Singer['id'] == 0 else Singer['id']
                 data = (id,Singer['name'])
                 sqlconnect.addSinger(data)
                 sqlconnect.addRelationsip(('Relationsipms','Music_Id','Singer_Id',song['id'],id))
@@ -116,11 +116,13 @@ class Api:
         count = len(relust)
         n = int(count/self.poolCount)
         data = relust[nom*n:(nom+1)*n]
-        print('该线程为：'+str(nom))
         for i in data:
-            url = "http://music.163.com/api/playlist/detail?id="+str(i[0])+"&updateTime=-1"
-            jsonData = self.httpRequest(url)['result']
-            self.parsePlayListdesc(jsonData,sqlconnect)
+            if sqlconnect.selectfinshPlaylist(i[0]):
+                print('歌单id：'+str(i[0]))
+                sqlconnect.addfinshPlaylist(i[0])
+                url = "http://music.163.com/api/playlist/detail?id="+str(i[0])+"&updateTime=-1"
+                jsonData = self.httpRequest(url)['result']
+                self.parsePlayListdesc(jsonData,sqlconnect)
 
 
     #爬取歌单详细
@@ -140,7 +142,7 @@ class Api:
         # self.parsePlayList(self.httpRequest(url,'text'),sqlUtil())
         
         # 单页详细
-        url = "http://music.163.com/api/playlist/detail?id=2298138241&updateTime=-1"
+        url = "http://music.163.com/api/playlist/detail?id=2307369852&updateTime=-1"
         jsonData = self.httpRequest(url)['result']
         self.parsePlayListdesc(jsonData,sqlUtil())
 
@@ -148,7 +150,8 @@ if __name__  == "__main__":
     print('开始')
     api = Api()
     #爬取热门歌单ip
-    api.getHotPlayList()
+    # api.getHotPlayList()
     # 爬取详细
     api.getPlayListdesc()
+    # api.text()
 
