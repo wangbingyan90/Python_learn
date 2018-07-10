@@ -24,4 +24,41 @@ r.encoding = r.apparent_encoding
 jsondata = r.json()
 
 result = jsondata['result']
-print(result)
+
+print('创建时间')
+print(result['createTime'])
+
+print('更新时间')
+print(result['updateTime'])
+
+print('播放次数')
+print(result['playCount'])
+
+print('封面')
+print(result['coverImgUrl'])
+
+print('介绍')
+print(result['description'])
+
+print('名称')
+print(result['name'])
+
+print('歌单')
+print(result['id'])
+
+print('介绍')
+print(result['description'])
+
+print('收藏次数')
+print(result['subscribedCount'])
+
+print('分享次数')
+print(result['shareCount'])
+
+print('评论次数')
+print(result['commentCount'])
+
+print('标签数组')
+print(result['tags'])
+
+

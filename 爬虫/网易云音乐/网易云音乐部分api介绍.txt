@@ -1,8 +1,8 @@
 歌单详细 http://music.163.com/api/playlist/detail?id=37880978&updateTime=-1
 
 result
-	createTime 创建时间(毫秒)
-	updateTime 更新时间(毫秒)
+	createTime 创建时间(毫秒*1000)
+	updateTime 更新时间(毫秒*1000)
 	playCount 播放次数
 	coverImgUrl 封面
 	description 介绍
@@ -19,13 +19,14 @@ result
 		city 城市邮编
 		userId 作者ID
 		nickname 作者姓名
-	
+		signature 个人介绍
+
 	trcaks	数组
 		0
 			name 歌名
 			id 歌曲ID
 			popularity 指数
-			duration 时长(秒数*1000)
+			duration 时长(毫秒)
 			alias 数组
 				0：简短介绍
 			artists：数组
@@ -41,8 +42,68 @@ result
 				publishTime 发布时间(毫秒)
 				subType 类型
 			
-			1 。。。。
-			
+		1 。。。。
+
+数据表
+    # 歌单数据
+    # List_Id = result['id']
+    # List_Name = result['name']
+    
+    creator = result['creator']
+    # Author_Id = creator['userId']
+
+    # List_img = result['coverImgUrl']
+    # PlayCount = result['playCount']
+    # List_creatTime = result['createTime']
+    # List_updataTime = result['updateTime']
+    # Description = result['description']
+    # SubscribedCount = result['subscribedCount']
+    # ShareCount = result['shareCount']
+    # CommentCount = result['commentCount']
+    # Tags = result['tags']
+    # print(Tags[0])
+
+    # 作者数据
+    # Author_Name = creator['nickname']
+    # Signature = creator['signature']
+    # city = creator['city']
+    # Author_img = creator['avatarUrl']
+    # data = (Author_Id,Author_Name,Signature,city,Author_img)
+    # sqlconnet = sqlUtil()
+    # print(data)
+    # sqlconnet.addAuthor(data)
+
+    # 歌曲与歌单
+    trcaks = creator['trcaks']
+    Music_Id = trcaks['id']
+    # List_Id
+
+    # 歌手
+    artists = trcaks['artists']
+    Singer_name = artists['name']
+    Singer_Id = artists['id']
+
+    # 歌曲于歌手
+    # Music_Id
+    # Singer_Id
+
+    # 歌曲
+    album = trcaks['album']
+    # Music_Id
+    Music_Name = trcaks['name']
+    Music_img = album['blurPicUrl']
+    Music_creatTime =  album['publishTime']
+    Popularity = trcaks['popularity']
+    Description = trcaks['alias']
+    Duration = trcaks['duration']
+    Company = album['company']
+    SubType = album['subType']
+    # CommentCount = 无
+
+
+
+
+
 			
 
 				
