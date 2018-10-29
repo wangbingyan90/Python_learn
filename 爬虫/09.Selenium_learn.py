@@ -18,7 +18,7 @@ def first():
     input.send_keys('iPhone') 
     input.clear()
     '''
-    browser = webdriver.Chrome()
+    browser = webdriver.Firefox()
     try:
         browser.get('https://www.baidu.com')
         input = browser.find_element_by_id('kw') # 属性id为kw的数据
@@ -143,7 +143,7 @@ def fourth():
     browser.switch_to_window(browser.window_handles[0])
 
 if __name__  == "__main__":
-    # first()
+    first()
     # second()
     # third()
-    fourth()
+    # fourth()
