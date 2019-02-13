@@ -2,6 +2,8 @@
 
 学习scrapy
 
+学习的最佳方式是使用示例
+
 安装
 
     pip install scrapy
@@ -26,6 +28,12 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
 创建项目
 
     scrapy startproject 项目名
+
+执行项目
+
+    进入项目目录
+    scrapy crawl 项目名
+    或 scrapy crawl 项目名 -o quotes.jl
 
 主要解析方式：
     
@@ -56,5 +64,21 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
                 'author': quote.css('small.author::text').extract_first(),
                 'tags': quote.css('div.tags a.tag::text').extract(),
             }
+
+##### 命令参数使用
+
+这些参数传递给Spider的__init__方法，默​​认情况下变为spider属性
+
+    -a参数
+    scrapy crawl quotes -o quotes-humor.json -a tag=humor
+    为参数提供的值tag将通过self.tag。您可以使用此选项使您的蜘蛛只获取具有特定标记的引号，并根据参数构建URL
+    如果您将tag=humor参数传递给此蜘蛛，您会注意到它只会访问humor标记中的URL ，例如 http://quotes.toscrape.com/tag/humor。
+    更多参数：https://docs.scrapy.org/en/latest/topics/spiders.html#spiderargs
+
+进一步学习
+
+移步基础学习
+
+
 
 
